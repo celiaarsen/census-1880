@@ -29,4 +29,10 @@ Steps:
         -Remove any other variables that are not necessary
     5. Perform spatial join
 """
+print("script started")
+import arcpy
+print("arcpy imported")
+directory = "C:/Users/Celia/Desktop/1880DataByCity - Copy/Albany"
+targetFeatures = directory+"AlbanyET.shp"
+individualPeople = directory+"AlbanyCE.shp"
 
