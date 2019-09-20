@@ -32,7 +32,27 @@ Steps:
 print("script started")
 import arcpy
 print("arcpy imported")
-directory = "C:/Users/Celia/Desktop/1880DataByCity - Copy/Albany"
-targetFeatures = directory+"AlbanyET.shp"
-individualPeople = directory+"AlbanyCE.shp"
+directory = "C:/Users/Celia/Desktop/1880DataByCity-Copy/Albany/"
+target_features = directory+"AlbanyET.shp"
+print(target_features)
+individual_people = directory+"AlbanyCE.shp"
+print(individual_people)
+
+#CopyFeatures(in_features, out_feature_class)
+arcpy.CopyFeatures_management(individual_people, directory+"AlbanyCE_occs.shp")
+joinFeatures = directory+"AlbanyCE_occs.shp"
+print("Copied CE file")
+field_name = "occs"
+
+codeblock = """
+def occ_dummy(occupation):
+    if (occupation=="LABORER":
+        return 1
+    else:
+        return NULL """
+
+#AddField(in_table, field_name, field_type, {field_precision}, {field_scale})
+arcpy.AddField(joinFeatures, field_name, "SHORT")
+#CalculateField(in_table, field, expression, {expression_type}, {code_block})
+arcpy.CalculateField(joinFeatures, field_name, "occ_dummy(!occs!", "PYTHON3", codeblock)
 
