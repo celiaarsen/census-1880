@@ -31,6 +31,7 @@ Steps:
 """
 print("script started")
 import arcpy
+arcpy.env.overwriteOutput = 1
 print("arcpy imported")
 directory = "C:/Users/Celia/Desktop/1880DataByCity-Copy/Albany/"
 target_features = directory+"AlbanyET.shp"
