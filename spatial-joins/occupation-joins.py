@@ -53,7 +53,7 @@ def occ_dummy(occupation):
         return NULL """
 
 #AddField(in_table, field_name, field_type, {field_precision}, {field_scale})
-arcpy.AddField(joinFeatures, field_name, "SHORT")
+arcpy.AddField_management(joinFeatures, field_name, "SHORT")
 #CalculateField(in_table, field, expression, {expression_type}, {code_block})
-arcpy.CalculateField(joinFeatures, field_name, "occ_dummy(!occs!", "PYTHON3", codeblock)
+arcpy.CalculateField_management(joinFeatures, field_name, "occ_dummy(!occs!", "PYTHON3", codeblock)
 
