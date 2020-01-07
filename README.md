@@ -12,6 +12,11 @@ Data can be downloaded from https://s4.ad.brown.edu/Projects/UTP2/39cities.htm o
         +-- dbf_to_csv.py             <-- make copies of all DBF files in directory as CSVs
         +-- fix_projections.py        <-- project shapefiles into appropriate StatePlane proj
         +-- fullCount_to_cityCsvs.py  <-- divide single file into files for all cities
-        +-- merge_census.py           <-- merging all 4 NYC-Manhattan Census files together and tabulate the number of men and women in                                               each unique occupation
+        +-- merge_census.py           <-- merging all 4 NYC-Manhattan Census files together and tabulate the number of men and women in each unique occupation
+    
+    +-- density_curves/
+        +-- density_curves_all_cities.py    <-- percent of population living at each density level
+        +-- weighted_blocks.py
+        +-- weighted_ethnicity_blocks.py
 
 ```
