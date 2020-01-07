@@ -4,7 +4,8 @@ This repo contains scripts for manipulating and analyzing the 1880 U.S. Census f
 
 Data can be downloaded from https://s4.ad.brown.edu/Projects/UTP2/39cities.htm or https://usa.ipums.org/usa/data.shtml
 
-.> scripts/
+```
+> scripts/
 ....> data-management/
 ........> cleanXY.py (create copy of data with only valid XY coordinates)
 ........> combine_cities.py (combine family units from all cities into 1 file)
@@ -14,3 +15,4 @@ Data can be downloaded from https://s4.ad.brown.edu/Projects/UTP2/39cities.htm o
 ........> merge_census.py (merging all 4 NYC-Manhattan Census files together and 
 tabulate the number of men and women in each unique occupation)
 
+```
