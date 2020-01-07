@@ -20,3 +20,42 @@ Steps:
 
 import csv
 
+city_code_path = 'C:/Users/Celia/Desktop/EthnicityUrbanHGIS/IPUMS_FullCount/IPUMS_cityCodes.csv'
+in_path = 'C:/Users/Celia/Desktop/EthnicityUrbanHGIS/IPUMS_FullCount/AllCities_XY.csv'
+out_path = 'C:/Users/Celia/Desktop/EthnicityUrbanHGIS/IPUMS_FullCount/'
+bad_data = 'C:/Users/Celia/Desktop/EthnicityUrbanHGIS/IPUMS_FullCount/no_city_data.csv'
+
+#create citycodes citionary
+city_codes = {}
+with open(city_code_path, newline='\n') as f:
+    reader = csv.DictReader(f) 
+    for row in reader:
+        city_codes[row['city_code']] = row['city_name']
+        
+#Create outfile_dict of city codes and output file names
+#city_code : fileName
+outfile_dict = {}
+
+with open(in_path, newline='\n') as f:
+    reader = csv.DictReader(f) 
+    for row in reader:
+        try:
+            file_name = outfile_dict[row['CITY']]
+            with open(out_path+file_name, 'a+', newline='') as o:
+                w = csv.DictWriter(o, row.keys())
+                w.writerow(row)
+        except KeyError:
+            try:
+                outfile_dict[row['CITY']] = city_codes[row['CITY']]+'_IPUMS.csv'
+                file_name = outfile_dict[row['CITY']]
+                with open(out_path+file_name, 'a+', newline='') as o:
+                    w = csv.DictWriter(o, row.keys())
+                    w.writeheader()
+                    w.writerow(row)
+            except KeyError:
+                with open(bad_data, 'a+', newline='') as o:
+                    w = csv.DictWriter(o, row.keys())
+                    w.writerow(row)
+                
+                
+            
