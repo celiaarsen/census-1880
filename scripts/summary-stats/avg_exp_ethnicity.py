@@ -2,6 +2,8 @@
 """
 Created on Sat May  4 14:44:19 2019
 
+Calculate average experienced density for each city
+
 @author: Celia
 """
 import pandas as pd

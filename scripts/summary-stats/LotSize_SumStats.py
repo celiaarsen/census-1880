@@ -2,6 +2,9 @@
 """
 Created on Thu Jun 27 15:15:16 2019
 
+Get the mean, median, sd, min, and max for lot size in each city
+
+
 @author: Celia
 """
 

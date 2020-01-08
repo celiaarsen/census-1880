@@ -2,6 +2,9 @@
 """
 Created on Wed Jun 26 17:14:33 2019
 
+Get the mean, median, sd, min, and max for building population in each city
+
+
 @author: Celia
 """
 

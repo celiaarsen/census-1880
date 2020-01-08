@@ -2,7 +2,7 @@
 """
 Created on Wed Jun 19 17:04:20 2019
 inputs: csv files with each block and the sum of each ethnicity on the block
-output: one csv fiel with 40 cities and the total number of people of each ethnicity
+output: one csv file with 40 cities and the total number of people of each ethnicity
 
 @author: Celia
 """

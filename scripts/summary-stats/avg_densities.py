@@ -2,6 +2,8 @@
 """
 Created on Sun Apr 21 19:00:48 2019
 
+Get average block-level density for each city
+
 @author: Celia
 """
 import pandas as pd
