@@ -57,17 +57,19 @@ def set_file_paths(city):
     print('output file: ', out_features)
 
 #Create a copy of full count features
-def copy_features():
+def copy_features(city):
     #CopyFeatures(in_features, out_feature_class)
     arcpy.CopyFeatures_management(individuals, 
-                                  directory+"AlbanyIPUMS_occs_sample.shp")
+                                  directory+city+"_IPUMS_occs.shp")
     print("Copied full count data file")
+    print()
     
 #make the copy of individuals the join features
-def set_join_features():
+def set_join_features(city):
     global join_features
-    join_features = directory+"AlbanyIPUMS_occs_sample.shp"
+    join_features = directory+city+"_IPUMS_occs.shp"
     print('join features: ', join_features)
+    print()
     
 #Make a dictionary with occupational categories and their codes
 def make_occ_dictionary():
@@ -82,7 +84,7 @@ def make_occ_dictionary():
                 occupations[row["Category"]].append(row["OCC"])
             except:
                 occupations[row["Category"]] = [row["OCC"]]
-    print("created occupation dictionary")
+    print("Created occupation dictionary")
     return occupations
     
 #Add a dummy field for each occupation    
@@ -92,6 +94,7 @@ def add_dummy_fields():
     occupations = make_occ_dictionary()
     for occ in occupations:
         arcpy.AddField_management(join_features, occ, "SHORT")
+    print("Added dummy fields")
     return occupations
 
 #Make a codeblock that assigns rules for making dummy variables
@@ -112,12 +115,12 @@ def calculate_fields(occupation_categories):
     global join_features
     #for each of the dummy variables
     for field_name in occupation_categories:
-        print(field_name)
         #set the rules
         codeblock = make_code_block(field_name, occupation_categories) 
         #calculate the field
         arcpy.CalculateField_management(join_features, field_name, 
                                         "calc_field(!OCC!)","PYTHON3",codeblock)
+    print("Calculated fields")
 
 #Set merge rules for spatial join
 #See https://pro.arcgis.com/en/pro-app/arcpy/classes/fieldmappings.htm
@@ -136,6 +139,7 @@ def set_merge_rules(fieldMappings, occupations):
             #remove all other non-required fields in the joinFeatures table
             x = fieldMappings.findFieldMapIndex(field.name)
             fieldMappings.removeFieldMap(x)
+    print("Merge rules set")
     return fieldMappings
     
 #Set field mappings 
@@ -150,8 +154,7 @@ def set_field_mappings(occupations):
     fieldMappings.addTable(join_features)
     
     fieldMappings = set_merge_rules(fieldMappings, occupations)
-    print("field mappings set")
-    
+    print("Field mappings set")
     return fieldMappings
 
 #aggregate the individual data up to the block level
@@ -165,18 +168,32 @@ def spatial_join(occupations):
     print()
     print("Spatial join finished!")
 
- 
-if __name__ == '__main__':
-    with open(occupations_path, newline='\n') as f:
-        reader = csv.DictReader(f)    
-        for city in reader: 
-            set_file_paths(city)
-            copy_features()
-            set_join_features()
-            occupations = add_dummy_fields()
-            calculate_fields(occupations)
-            spatial_join(occupations)
+############################################################################## 
     
+if __name__ == '__main__':
+    with open(city_list, newline='\n') as f:
+        for city in f: 
+            print()
+            print()
+            print()
+            print("*************************************")
+            city_stripped = city.strip()
+            print(city_stripped)
+            try:
+                set_file_paths(city_stripped)
+                copy_features(city_stripped)
+                set_join_features(city_stripped)
+                occupations = add_dummy_fields()
+                calculate_fields(occupations)
+                spatial_join(occupations)
+            except:
+                print()
+                print("!!!!!!!!!!!!!!!!!!!!!!!")
+                print("error processing ", city_stripped)
+                print("Check results for this city")
+                print("!!!!!!!!!!!!!!!!!!!!!!!")
+                
+
 
 
 
