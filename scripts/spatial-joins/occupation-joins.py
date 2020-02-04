@@ -36,16 +36,25 @@ arcpy.env.overwriteOutput = 1
 print("arcpy imported")
 directory = "C:/Users/Celia/Desktop/EthnicityUrbanHGIS/TestData/"
 target_features = directory+"POPULATION DENSITY POLYGON FILE" 
-join_features = 'RESET AFTER COPYING TARGET FEATURES' 
 individuals = directory+"FULL COUNT MICRO DATA FILE FROM IPUMS" 
-out_features = directory+"AlbanyOcc.shp" 
+join_features = "COPY OF FULL COUNT MICRO DATA TO JOIN TO POLYGON FILE"
+out_features = directory+"OUTPUT FILE" 
 occupations_path = directory+"occupations_sample.csv"
+city_list = directory+"city_list.csv"
 
-DEF
+def set_file_paths(city):
+    global directory
+    global target_features
+    global individuals
+    global out_features
 
-print('target features: ', target_features)
-print('full count census: ', individuals)
-print('output file: ', out_features)
+    target_features = directory+city+"PD.shp"
+    individuals = directory+city+"_IPUMS_proj.shp"
+    out_features = directory+city+"Occ.shp"
+    
+    print('target features: ', target_features)
+    print('full count census: ', individuals)
+    print('output file: ', out_features)
 
 #Create a copy of full count features
 def copy_features():
@@ -158,14 +167,15 @@ def spatial_join(occupations):
 
  
 if __name__ == '__main__':
-    for 
-        set_
-        #copy_features()
-        set_join_features()
-        #occupations = add_dummy_fields()
-        occupations = make_occ_dictionary()
-        #calculate_fields(occupations)
-        #spatial_join(occupations)
+    with open(occupations_path, newline='\n') as f:
+        reader = csv.DictReader(f)    
+        for city in reader: 
+            set_file_paths(city)
+            copy_features()
+            set_join_features()
+            occupations = add_dummy_fields()
+            calculate_fields(occupations)
+            spatial_join(occupations)
     
 
 
