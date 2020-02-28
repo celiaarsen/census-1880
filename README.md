@@ -25,10 +25,13 @@ These data and scripts are being used for two ongoing research projects:
         +-- weighted_ethnicity_blocks.py    <-- weights city blocks by # of people of each ethnicity
     
     +-- spatial_joins/
+        +-- atyp_occs.py                    <-- Count working German & Irish working women in atypical occs on the block level
         +-- fem_male_occupations.py         <-- determine if residents are in male/female dominated occupations
         +-- join_ethnicity.py               <-- join and sum ethnic categories up to block level
         +-- join_irish_german.py            <-- calculate various dummy variables in NYC shapefile
-        +-- occupation-joins.py             <-- join count of specific occupations to block level
+        +-- occ-joins-v2.py                 <-- join count of specific occupations to city blocks (final version)
+        +-- occupation-joins.py             <-- join count of specific occupations to city blocks (fails for large cities)
+        +-- spatial_join_atyp               <-- Count working German & Irish working women in atypical occs on the block level
         +-- spatial_join_irish_german.py    <-- join NYC residents up to block level with calculated variables 
         +-- XY_table_to_shp.py              <-- create point shapefiles from xy tables
         
