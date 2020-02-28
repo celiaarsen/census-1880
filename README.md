@@ -4,7 +4,7 @@ This repo contains scripts for manipulating and analyzing the 1880 U.S. Census f
 
 Data can be downloaded from https://s4.ad.brown.edu/Projects/UTP2/39cities.htm or https://usa.ipums.org/usa/data.shtml
 
-These data and scripts are being used for two ongoing research projects:
+These scripts are used for data analysis in two ongoing research projects:
 1. Celia Arsen's senior thesis in economic history http://ssha2019.ssha.org/abstracts/100959
 2. Co-authored work with Gergely Baics (Barnard) and Leah Meisterlin (Columbia) http://ssha2019.ssha.org/abstracts/100862
 
